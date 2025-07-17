@@ -1,0 +1,6 @@
+Tools Used:
+- Splunk Cloud (Free Trial)
+- SPL (Search Processing Language)
+- Git & GitHub
+- Browser for screenshots
+- MS-Word-->  To write your incident response report
