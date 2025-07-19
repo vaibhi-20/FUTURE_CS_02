@@ -4,3 +4,4 @@ Tools Used:
 - Git & GitHub
 - Browser for screenshots
 - MS-Word-->  To write your incident response report
+- SOC Sample logs (imp-log.txt)
