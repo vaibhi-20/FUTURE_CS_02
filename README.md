@@ -32,7 +32,21 @@ Monitoring logs, analyzing security alerts, and drafting a professional incident
 1. Show Logs: source="imp-log.txt" host="name of the machine" sourcetype="implogs"  
 2. Malware Alerts: index=main source="imp-log.txt" action="malware detected"  
 3. Failed Logins: index=main source="imp-log.txt" user login failed
-
+4.Severity classification: index=main source="imp-log.txt" action="malware detected"
+| rex "user=(?<user>\w+)"
+| rex "ip=(?<ip>\d+\.\d+\.\d+\.\d+)"
+| rex "action=(?<action>[^|]+)"
+| rex "threat=(?<threat>.+)"
+| eval severity=case(
+    match(threat, "Rootkit"), "Critical",
+    match(threat, "Ransomware"), "Critical",
+    match(threat, "Worm"), "High",
+    match(threat, "Trojan"), "High",
+    match(threat, "Spyware"), "Medium",
+    1==1, "Low"
+)
+| table _time user ip threat severity
+| sort -_time
 ---
    
    
